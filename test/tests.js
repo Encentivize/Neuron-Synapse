@@ -226,6 +226,37 @@ describe('basic', function () {
         }
     });
 
+    it('Should get the token from the cache if it already exists', function (next) {
+        baseSuccesfullInitialise();
+        var tokenRequest = {
+            programName: 'encentivize',
+            scope: ""
+        };
+        synapse.getToken(tokenRequest, firstGetTokenDone);
+        var firstToken = null;
+
+        function firstGetTokenDone(error, token, cacheStatus) {
+            if (error) {
+                throw error;
+            }
+            token.should.be.ok;
+            firstToken = token;
+            cacheStatus.should.equal("cacheMiss");
+            synapse.getToken(tokenRequest, secondGetTokenDone);
+        }
+
+        function secondGetTokenDone(error, token, cacheStatus) {
+            if (error) {
+                throw error;
+            }
+            token.should.be.ok;
+            cacheStatus.should.equal("cacheHit");
+            firstToken.should.be.ok;
+            token.should.equal(firstToken);
+            return next();
+        }
+    });
+
     function baseSuccesfullInitialise() {
         synapse.initialise({
             neuronBaseUrl: "http://localhost:3666/",
