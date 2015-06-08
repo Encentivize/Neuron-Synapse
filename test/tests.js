@@ -257,6 +257,28 @@ describe('basic', function () {
         }
     });
 
+    it('_getCacheKey should be case insensitive', function () {
+        var scope1 = "a B c D E F";
+        var cacheKey1 = synapse._getCacheKey(scope1);
+        var scope2 = "A b c D e F";
+        var cacheKey2 = synapse._getCacheKey(scope2);
+        cacheKey1.should.equal(cacheKey2);
+    });
+
+    it('_getCacheKey should ignore the ordering of scopes', function () {
+        var scope1 = "a B c D E F";
+        var cacheKey1 = synapse._getCacheKey(scope1);
+        var scope2 = "F D E b c a";
+        var cacheKey2 = synapse._getCacheKey(scope2);
+        cacheKey1.should.equal(cacheKey2);
+    });
+
+    it('_getCacheKey should ignore extra whitespace scopes', function () {
+        var scope = "  a B c    D  E F  ";
+        var cacheKey = synapse._getCacheKey(scope);
+        cacheKey.should.equal("abcdef");
+    });
+
     function baseSuccesfullInitialise() {
         synapse.initialise({
             neuronBaseUrl: "http://localhost:3666/",
