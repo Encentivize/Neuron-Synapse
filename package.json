@@ -1,0 +1,32 @@
+{
+    "name": "neuron-synapse",
+    "version": "0.0.1",
+    "description": "todo",
+    "main": "lib/neuron-synapse.js",
+    "scripts": {
+        "test": "mocha --require should"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Encentivize/Neuron-Synapse.git"
+    },
+    "keywords": [
+        "neuron",
+        "token",
+        "oauth",
+        "oauth2.0"
+],
+    "dependencies": {
+        "node-rest-client": "1.5.1",
+        "url-join": "0.0.1"
+    },
+    "devDependencies": {
+        "mocha": "2.2.5",
+        "should": "6.0.3"
+    },
+    "author": {
+        "name": "Ryan Kotzen",
+        "email": "ryank@entelect.co.za"
+    },
+    "license": "MIT"
+}
