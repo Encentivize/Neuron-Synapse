@@ -4,7 +4,7 @@ var synapse = require('../lib/neuron-synapse.js');
 
 describe('basic', function () {
     it('getToken should throw an error if initialise has not been called', function () {
-        synapse.getToken({
+        synapse.getClientToken({
             programName: "bob"
         }, function (error) {
             error.message.should.equal(synapse.errorMessage.notInitialised);
@@ -135,14 +135,14 @@ describe('basic', function () {
 
     it('getToken should throw an error if inputs is null', function () {
         baseSuccesfullInitialise();
-        synapse.getToken(null, function (error) {
+        synapse.getClientToken(null, function (error) {
             error.message.should.equal(synapse.errorMessage.noInputs);
         });
     });
 
     it('getToken should throw an error if inputs is not an object', function () {
         baseSuccesfullInitialise();
-        synapse.getToken("null", function (error) {
+        synapse.getClientToken("null", function (error) {
             error.message.should.equal(synapse.errorMessage.inputsNotAnObject);
         });
     });
@@ -150,7 +150,7 @@ describe('basic', function () {
     it('getToken should throw an error if callback is not specified', function () {
         baseSuccesfullInitialise();
         try {
-            synapse.getToken({}, null);
+            synapse.getClientToken({}, null);
             throw new Error("should not have got here!");
         } catch (error) {
             error.message.should.equal(synapse.errorMessage.noCallback);
@@ -160,7 +160,7 @@ describe('basic', function () {
     it('getToken should throw an error if callback is not a function', function () {
         baseSuccesfullInitialise();
         try {
-            synapse.getToken({}, {});
+            synapse.getClientToken({}, {});
             throw new Error("should not have got here!");
         } catch (error) {
             error.message.should.equal(synapse.errorMessage.callbackNotAFunction);
@@ -169,14 +169,14 @@ describe('basic', function () {
 
     it('getToken should throw an error if inputs.programName is not specified', function () {
         baseSuccesfullInitialise();
-        synapse.getToken({}, function (error) {
+        synapse.getClientToken({}, function (error) {
             error.message.should.equal(synapse.errorMessage.programNameRequired);
         });
     });
 
     it('getToken should throw an error if inputs.programName is not a string', function () {
         baseSuccesfullInitialise();
-        synapse.getToken({
+        synapse.getClientToken({
             programName: {}
         }, function (error) {
             error.message.should.equal(synapse.errorMessage.programNameMustBeAString);
@@ -185,7 +185,7 @@ describe('basic', function () {
 
     it('getToken should throw an error if inputs.programName is a blank string', function () {
         baseSuccesfullInitialise();
-        synapse.getToken({
+        synapse.getClientToken({
             programName: "    "
         }, function (error) {
             error.message.should.equal(synapse.errorMessage.programNameCannotBeBlank);
@@ -201,7 +201,7 @@ describe('basic', function () {
     it('_serviceUrlTemplate should not change when getToken is called', function () {
         baseSuccesfullInitialise();
         var urlCopy = synapse._getServiceUrlTemplate();
-        synapse.getToken({
+        synapse.getClientToken({
             programName: 'test'
         }, getTokenDone);
 
@@ -212,7 +212,7 @@ describe('basic', function () {
 
     it('Should succeed if all the parameters are correct', function (next) {
         baseSuccesfullInitialise();
-        synapse.getToken({
+        synapse.getClientToken({
             programName: 'encentivize',
             scope: ""
         }, getTokenDone);
@@ -232,7 +232,7 @@ describe('basic', function () {
             programName: 'encentivize',
             scope: ""
         };
-        synapse.getToken(tokenRequest, firstGetTokenDone);
+        synapse.getClientToken(tokenRequest, firstGetTokenDone);
         var firstToken = null;
 
         function firstGetTokenDone(error, token, cacheStatus) {
@@ -242,7 +242,7 @@ describe('basic', function () {
             token.should.be.ok;
             firstToken = token;
             cacheStatus.should.equal("cacheMiss");
-            synapse.getToken(tokenRequest, secondGetTokenDone);
+            synapse.getClientToken(tokenRequest, secondGetTokenDone);
         }
 
         function secondGetTokenDone(error, token, cacheStatus) {
