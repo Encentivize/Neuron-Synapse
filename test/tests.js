@@ -194,19 +194,19 @@ describe('basic', function () {
 
     it('_serviceUrlTemplate should get set after initialise is called', function () {
         baseSuccesfullInitialise();
-        synapse.getServiceUrlTemplate().should.equal("http://localhost:3666/:programName/oauth/token");
+        synapse._getServiceUrlTemplate().should.equal("http://localhost:3666/:programName/oauth/token");
 
     });
 
     it('_serviceUrlTemplate should not change when getToken is called', function () {
         baseSuccesfullInitialise();
-        var urlCopy = synapse.getServiceUrlTemplate();
+        var urlCopy = synapse._getServiceUrlTemplate();
         synapse.getToken({
             programName: 'test'
         }, getTokenDone);
 
         function getTokenDone() {
-            synapse.getServiceUrlTemplate().should.equal(urlCopy);
+            synapse._getServiceUrlTemplate().should.equal(urlCopy);
         }
     });
 
