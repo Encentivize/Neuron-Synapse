@@ -29,40 +29,40 @@ describe('basic', function () {
         }
     });
 
-    it('initialise should throw an error if apiBaseUrl is not specified', function () {
+    it('initialise should throw an error if neuronBaseUrl is not specified', function () {
         try {
             synapse.initialise({});
             throw new Error("should not have got here!");
         } catch (error) {
-            error.message.should.equal(synapse.errorMessage.apiBaseUrlMustBeSpecified);
+            error.message.should.equal(synapse.errorMessage.neuronBaseUrlMustBeSpecified);
         }
     });
-    it('initialise should throw an error if apiBaseUrl is not a string', function () {
+    it('initialise should throw an error if neuronBaseUrl is not a string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: {}
+                neuronBaseUrl: {}
             });
             throw new Error("should not have got here!");
         } catch (error) {
-            error.message.should.equal(synapse.errorMessage.apiBaseUrlMustBeAString);
+            error.message.should.equal(synapse.errorMessage.neuronBaseUrlMustBeAString);
         }
     });
 
-    it('initialise should throw an error if apiBaseUrl is a blank string', function () {
+    it('initialise should throw an error if neuronBaseUrl is a blank string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "    "
+                neuronBaseUrl: "    "
             });
             throw new Error("should not have got here!");
         } catch (error) {
-            error.message.should.equal(synapse.errorMessage.apiBaseUrlCannotBeBlank);
+            error.message.should.equal(synapse.errorMessage.neuronBaseUrlCannotBeBlank);
         }
     });
 
     it('initialise should throw an error if clientId is not specified', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/"
+                neuronBaseUrl: "http://localhost:3666/"
             });
             throw new Error("should not have got here!");
         } catch (error) {
@@ -73,7 +73,7 @@ describe('basic', function () {
     it('initialise should throw an error if clientId is not a string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/",
+                neuronBaseUrl: "http://localhost:3666/",
                 clientId: {}
             });
             throw new Error("should not have got here!");
@@ -85,7 +85,7 @@ describe('basic', function () {
     it('initialise should throw an error if clientId is a blank string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/",
+                neuronBaseUrl: "http://localhost:3666/",
                 clientId: "      "
             });
             throw new Error("should not have got here!");
@@ -98,7 +98,7 @@ describe('basic', function () {
     it('initialise should throw an error if clientSecret is not specified', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/",
+                neuronBaseUrl: "http://localhost:3666/",
                 clientId: "bob"
             });
             throw new Error("should not have got here!");
@@ -110,7 +110,7 @@ describe('basic', function () {
     it('initialise should throw an error if clientSecret is not a string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/",
+                neuronBaseUrl: "http://localhost:3666/",
                 clientId: "bob",
                 clientSecret: {}
             });
@@ -123,7 +123,7 @@ describe('basic', function () {
     it('initialise should throw an error if clientSecret is a blank string', function () {
         try {
             synapse.initialise({
-                apiBaseUrl: "http://localhost:3000/",
+                neuronBaseUrl: "http://localhost:3666/",
                 clientId: "bob",
                 clientSecret: "      "
             });
@@ -194,7 +194,7 @@ describe('basic', function () {
 
     it('_serviceUrlTemplate should get set after initialise is called', function () {
         baseSuccesfullInitialise();
-        synapse._getServiceUrlTemplate().should.equal("http://localhost:3000/api/programs/:programName/apps/token");
+        synapse._getServiceUrlTemplate().should.equal("http://localhost:3666/:programName/oauth/token");
 
     });
 
@@ -281,7 +281,7 @@ describe('basic', function () {
 
     function baseSuccesfullInitialise() {
         synapse.initialise({
-            apiBaseUrl: "http://localhost:3000/",
+            neuronBaseUrl: "http://localhost:3666/",
             clientId: "Aperitif",
             clientSecret: "qwh3ejk12"
         });
