@@ -12,18 +12,25 @@
         "url": "git@github.com:Encentivize/Neuron-Synapse.git"
     },
     "keywords": [
-        "neuron",
-        "token",
-        "oauth",
-        "oauth2.0"
-],
+    "neuron",
+    "token",
+    "oauth",
+    "oauth2.0"
+  ],
     "dependencies": {
         "node-rest-client": "1.5.1",
         "url-join": "0.0.1"
     },
     "devDependencies": {
+        "fs": "0.0.2",
+        "gulp": "3.9.0",
+        "gulp-istanbul": "0.10.0",
+        "gulp-jshint": "1.11.0",
+        "gulp-mocha": "2.1.1",
         "mocha": "2.2.5",
-        "should": "6.0.3"
+        "npm": "2.11.1",
+        "should": "6.0.3",
+        "yargs": "3.10.0"
     },
     "author": {
         "name": "Ryan Kotzen",
