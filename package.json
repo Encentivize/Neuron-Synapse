@@ -1,7 +1,13 @@
 {
     "name": "neuron-synapse",
-    "version": "0.0.1",
     "description": "todo",
+    "version": "0.0.1",
+    "author": {
+        "name": "Ryan Kotzen",
+        "email": "ryank@entelect.co.za"
+    },
+    "homepage": "http://www.encentivize.co.za",
+    "license": "MIT",
     "main": "lib/neuron-synapse.js",
     "scripts": {
         "test": "mocha",
@@ -12,11 +18,11 @@
         "url": "git@github.com:Encentivize/Neuron-Synapse.git"
     },
     "keywords": [
-    "neuron",
-    "token",
-    "oauth",
-    "oauth2.0"
-  ],
+        "neuron",
+        "token",
+        "oauth",
+        "oauth2.0"
+    ],
     "dependencies": {
         "node-rest-client": "1.5.1",
         "url-join": "0.0.1"
@@ -28,13 +34,8 @@
         "gulp-jshint": "1.11.0",
         "gulp-mocha": "2.1.1",
         "mocha": "2.2.5",
-        "npm": "2.11.1",
+        "npm": "2.8.3",
         "should": "6.0.3",
         "yargs": "3.10.0"
-    },
-    "author": {
-        "name": "Ryan Kotzen",
-        "email": "ryank@entelect.co.za"
-    },
-    "license": "MIT"
+    }
 }
