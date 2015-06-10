@@ -13,7 +13,7 @@ Once you have your clientId and client Secret, in the root of your app (reccomen
 
 
     var neuronSynapse = require('neuron-synapse);
-    neuronSynapse..initialise({
+    neuronSynapse.initialise({
 	    neuronBaseUrl: "<linkToNeuronBaseUrl>",
 	    clientId: "<yourClientId>",
 	    clientSecret: "<yourClientSecret>"
