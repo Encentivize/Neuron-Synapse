@@ -4,7 +4,8 @@
     "description": "todo",
     "main": "lib/neuron-synapse.js",
     "scripts": {
-        "test": "mocha"
+        "test": "mocha",
+        "unitTests": "mocha -g unit"
     },
     "repository": {
         "type": "git",
