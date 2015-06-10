@@ -1,8 +1,9 @@
 /*globals describe, it*/
 'use strict';
 var synapse = require('../lib/neuron-synapse.js');
+require('should');
 
-describe('basic', function () {
+describe('unit', function () {
     it('getToken should throw an error if initialise has not been called', function () {
         synapse.getClientToken({
             programName: "bob"
@@ -210,6 +211,34 @@ describe('basic', function () {
         }
     });
 
+
+
+    it('_getCacheKey should be case insensitive', function () {
+        var scope1 = "a B c D E F";
+        var cacheKey1 = synapse._getCacheKey(scope1);
+        var scope2 = "A b c D e F";
+        var cacheKey2 = synapse._getCacheKey(scope2);
+        cacheKey1.should.equal(cacheKey2);
+    });
+
+    it('_getCacheKey should ignore the ordering of scopes', function () {
+        var scope1 = "a B c D E F";
+        var cacheKey1 = synapse._getCacheKey(scope1);
+        var scope2 = "F D E b c a";
+        var cacheKey2 = synapse._getCacheKey(scope2);
+        cacheKey1.should.equal(cacheKey2);
+    });
+
+    it('_getCacheKey should ignore extra whitespace scopes', function () {
+        var scope = "  a B c    D  E F  ";
+        var cacheKey = synapse._getCacheKey(scope);
+        cacheKey.should.equal("abcdef");
+    });
+
+
+});
+
+describe('integration', function () {
     it('Should succeed if all the parameters are correct', function (next) {
         baseSuccesfullInitialise();
         synapse.getClientToken({
@@ -256,34 +285,13 @@ describe('basic', function () {
             return next();
         }
     });
-
-    it('_getCacheKey should be case insensitive', function () {
-        var scope1 = "a B c D E F";
-        var cacheKey1 = synapse._getCacheKey(scope1);
-        var scope2 = "A b c D e F";
-        var cacheKey2 = synapse._getCacheKey(scope2);
-        cacheKey1.should.equal(cacheKey2);
-    });
-
-    it('_getCacheKey should ignore the ordering of scopes', function () {
-        var scope1 = "a B c D E F";
-        var cacheKey1 = synapse._getCacheKey(scope1);
-        var scope2 = "F D E b c a";
-        var cacheKey2 = synapse._getCacheKey(scope2);
-        cacheKey1.should.equal(cacheKey2);
-    });
-
-    it('_getCacheKey should ignore extra whitespace scopes', function () {
-        var scope = "  a B c    D  E F  ";
-        var cacheKey = synapse._getCacheKey(scope);
-        cacheKey.should.equal("abcdef");
-    });
-
-    function baseSuccesfullInitialise() {
-        synapse.initialise({
-            neuronBaseUrl: "http://localhost:3666/",
-            clientId: "Aperitif",
-            clientSecret: "qwh3ejk12"
-        });
-    }
 });
+
+
+function baseSuccesfullInitialise() {
+    synapse.initialise({
+        neuronBaseUrl: "http://localhost:3666/",
+        clientId: "Aperitif",
+        clientSecret: "qwh3ejk12"
+    });
+}
